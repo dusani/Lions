@@ -15,6 +15,10 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/data", (req, res) => {
+  res.json(jsonData);
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
