@@ -1,0 +1,9 @@
+BOATS API
+
+{
+    name: string,
+    make: string,
+    model: string,
+    year: number,
+    id: string
+}
