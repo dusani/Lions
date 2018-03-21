@@ -1,6 +1,6 @@
 var express = require("express");
-var bodyParser = require("body-parser");
-var _ = require("lodash");
+// var bodyParser = require("body-parser");
+// var _ = require("lodash");
 var morgan = require("morgan");
 
 var app = express();
@@ -18,8 +18,8 @@ var updatedId = function(req, res, next) {
 
 app.use(morgan("dev"));
 app.use(express.static("client"));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use((err, req, res, next) => {
     if (err) {
         res.status(500).send(error);
@@ -27,7 +27,8 @@ app.use((err, req, res, next) => {
 });
 
 app.param("id", function(req, res, next, id) {
-    var boat = _.find(boats, { id: id });
+    // var boat = _.find(boats, { id: id });
+    var boat = boats.find(boat => boat.id == id);
 
     if (boat) {
         req.boat = boat;
@@ -59,17 +60,19 @@ app.put("/boats/:id", (req, res) => {
         delete update.id;
     }
 
-    var boat = _.findIndex(boats, { id: req.params.id });
+    // var boat = _.findIndex(boats, { id: req.params.id });
+    var boat = boats.findIndex(boat => boat.id == req.params.id);
     if (!boats[boat]) {
         res.send();
     } else {
-        var updatedboat = _.assign(boats[boat], update);
+        var updatedboat = Object.assign({}, boats[boat], update);
         res.json(updatedboat);
     }
 });
 
 app.delete("/boats/:id", (req, res) => {
-    var boat = _.findIndex(boats, { id: req.params.id });
+    // var boat = _.findIndex(boats, { id: req.params.id });
+    var boat = boats.findIndex(boat => boat.id == req.params.id);
     if (!boats[boat]) {
         res.send();
     } else {
