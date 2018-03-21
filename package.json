@@ -1,13 +1,20 @@
 {
-  "name": "Lions",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "Daniel Usani <daniel.e.usani@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.3",
-    "lodash": "^4.17.5",
-    "morgan": "^1.9.0"
-  }
+    "name": "Lions",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "Daniel Usani <daniel.e.usani@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "start": "nodemon server/server.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.18.2",
+        "express": "^4.16.3",
+        "lodash": "^4.17.5",
+        "morgan": "^1.9.0"
+    },
+    "devDependencies": {
+        "chai": "^4.1.2",
+        "supertest": "^3.0.0"
+    }
 }
