@@ -13,50 +13,50 @@ var id = 0;
 
 // routes
 app.get("/lions", (req, res) => {
-  res.json(lions);
+    res.json(lions);
 });
 
 app.get("/lions/:id", (req, res) => {
-  var lion = _.find(lions, { id: req.params.id });
-  res.json(lion || {});
+    var lion = _.find(lions, { id: req.params.id });
+    res.json(lion || {});
 });
 
 app.post("/lions", (req, res) => {
-  var lion = req.body;
-  id++;
-  lion.id = id + "";
+    var lion = req.body;
+    id++;
+    lion.id = id + "";
 
-  lions.push(lion);
+    lions.push(lion);
 
-  res.json(lion);
+    res.json(lion);
 });
 
 app.put("/lions/:id", (req, res) => {
-  var update = req.body;
-  if (update.id) {
-    delete update.id;
-  }
+    var update = req.body;
+    if (update.id) {
+        delete update.id;
+    }
 
-  var lion = _.findIndex(lions, { id: req.params.id });
-  if (!lions[lion]) {
-    res.send();
-  } else {
-    var updatedLion = _.assign(lions[lion], update);
-    res.json(updatedLion);
-  }
+    var lion = _.findIndex(lions, { id: req.params.id });
+    if (!lions[lion]) {
+        res.send();
+    } else {
+        var updatedLion = _.assign(lions[lion], update);
+        res.json(updatedLion);
+    }
 });
 
 app.delete("/lions/:id", (req, res) => {
-  var lion = _.findIndex(lions, { id: req.params.id });
-  if (!lions[lion]) {
-    res.send();
-  } else {
-    var deletedLion = lions[lion];
-    lions.splice(lion, 1);
-    res.json(deletedLion);
-  }
+    var lion = _.findIndex(lions, { id: req.params.id });
+    if (!lions[lion]) {
+        res.send();
+    } else {
+        var deletedLion = lions[lion];
+        lions.splice(lion, 1);
+        res.json(deletedLion);
+    }
 });
 
 app.listen(3000, () => {
-  console.log("Listening on port 3000");
+    console.log("Listening on port 3000");
 });
