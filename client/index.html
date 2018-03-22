@@ -5,11 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
     <title>These Are Our Lions</title>
 </head>
 
 <body>
-    <h1>Hey</h1>
+    <main>
+        <h1>Lions</h1>
+
+        <form name="lions">
+            <div class="textbox">
+                <input type="text" required name="lion-name">
+                <span class="highight"></span>
+                <span class="bar"></span>
+                <label>Lion Name</label>
+            </div>
+
+            <div class="textbox">
+                <input type="text" required name="lion-pride">
+                <span class="highight"></span>
+                <span class="bar"></span>
+                <label>Lion Pride</label>
+            </div>
+
+            <input type="number" name="lion-age">
+
+            <select name="select">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="content">
+            <ul class="lion-list">
+
+            </ul>
+        </div>
+    </main>
 
     <script src="app.js"></script>
 </body>
