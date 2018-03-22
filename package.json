@@ -5,7 +5,7 @@
     "author": "Daniel Usani <daniel.e.usani@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "start": "nodemon server/server.js"
+        "start": "nodemon ."
     },
     "dependencies": {
         "body-parser": "^1.18.2",
