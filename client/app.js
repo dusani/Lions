@@ -6,7 +6,7 @@ function ready(fn) {
     }
 }
 
-var getValues = function(params) {
+var getValues = function() {
     // grab our form values
     var name = document.querySelector("input[name=lion-name]").value;
     var pride = document.querySelector("input[name=lion-pride]").value;
@@ -35,9 +35,9 @@ const lionTemplate =
     "<small>age: <%= age %></small>" +
     "<small><%= gender %></small>";
 
-const makeTemplate = () => {
+const makeTemplate = data => {
     const li = document.createElement("li");
-    const lionList = document.querySelector("lion-list");
+    const lionList = document.querySelector(".lion-list");
     const compiled = _.template(lionTemplate);
     const lionHtml = compiled(data);
     li.innerHTML = lionHtml;
@@ -50,7 +50,7 @@ const updateLionList = () => {
 };
 
 const makeLionList = () => {
-    lions.foreach(lion => {
+    lions.forEach(lion => {
         makeTemplate(lion);
     });
 };
@@ -58,7 +58,7 @@ const makeLionList = () => {
 const getAllLions = () => {
     fetch("/lions")
         .then(res => {
-            console.log(res);
+            // console.log(res);
             return res.json(res);
         })
         .then(data => {
@@ -68,6 +68,8 @@ const getAllLions = () => {
 };
 
 ready(function() {
+    getAllLions();
+
     var form = document.querySelector("form");
 
     form.addEventListener("submit", function(event) {
@@ -90,8 +92,8 @@ ready(function() {
             .then(function(createdLion) {
                 lions.push(createdLion);
                 // TODO update to lions list
-                updateLionList();
                 console.log(lions);
+                updateLionList();
             });
         return false;
     });
