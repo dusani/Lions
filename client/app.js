@@ -29,6 +29,44 @@ var getValues = function(params) {
 // Serves as a cache for the front-end so we don't have to make multiple trips to the back end to get data
 var lions = [];
 
+const lionTemplate =
+    "<h3><%= name %></h3>" +
+    "<h3><%= pride %></h3>" +
+    "<small>age: <%= age %></small>" +
+    "<small><%= gender %></small>";
+
+const makeTemplate = () => {
+    const li = document.createElement("li");
+    const lionList = document.querySelector("lion-list");
+    const compiled = _.template(lionTemplate);
+    const lionHtml = compiled(data);
+    li.innerHTML = lionHtml;
+    lionList.insertBefore(li, lionList.firstChild);
+};
+
+const updateLionList = () => {
+    const lionData = lions[lions.length - 1];
+    makeTemplate(lionData);
+};
+
+const makeLionList = () => {
+    lions.foreach(lion => {
+        makeTemplate(lion);
+    });
+};
+
+const getAllLions = () => {
+    fetch("/lions")
+        .then(res => {
+            console.log(res);
+            return res.json(res);
+        })
+        .then(data => {
+            lions = lions.concat(data);
+            makeLionList();
+        });
+};
+
 ready(function() {
     var form = document.querySelector("form");
 
@@ -52,6 +90,7 @@ ready(function() {
             .then(function(createdLion) {
                 lions.push(createdLion);
                 // TODO update to lions list
+                updateLionList();
                 console.log(lions);
             });
         return false;
