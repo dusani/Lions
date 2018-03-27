@@ -25,18 +25,47 @@ const Lion = require("../models/lions");
 
 // routes
 lionRouter.get("/", (req, res) => {
-    res.json(lions);
+    Lion.find((err, lion) => {
+        if (err) {
+            res.send(err);
+        }
+
+        // mongoose sends info back in json format
+        res.send(lion);
+    });
 });
 
 lionRouter.get("/:id", (req, res) => {
-    var lion = req.lion;
-    res.json(lion || {});
+    // var lion = req.lion;
+    // res.json(lion || {});
+    Lion.findById(req.params.id, (err, lion) => {
+        if (err) {
+            res.send(err);
+        }
+        res.send(lion);
+    });
 });
 
-lionRouter.post("/", updatedId, (req, res) => {
-    var lion = req.body;
-    lions.push(lion);
-    res.json(lion);
+lionRouter.post("/", (req, res) => {
+    // var lion = req.body;
+    // lions.push(lion);
+    // res.json(lion);
+
+    // receive the json Lion object
+    const lionObj = new Lion({
+        name: req.body.name,
+        age: req.body.age,
+        pride: req.body.pride,
+        gender: req.body.gender
+    });
+
+    lionObj.save(err => {
+        if (err) {
+            res.send(err);
+        }
+
+        res.json({ message: "Lion Created" });
+    });
 });
 
 lionRouter.put("/:id", (req, res) => {

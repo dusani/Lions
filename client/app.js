@@ -32,8 +32,8 @@ var lions = [];
 const lionTemplate =
     "<h3><%= name %></h3>" +
     "<h3><%= pride %></h3>" +
-    "<small>age: <%= age %></small>" +
-    "<small><%= gender %></small>";
+    "<p>Age: <%= age %></p>" +
+    "<p>Gender: <%= gender %></p>";
 
 const makeTemplate = data => {
     const li = document.createElement("li");
